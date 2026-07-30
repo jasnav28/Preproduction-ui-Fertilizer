@@ -53,9 +53,26 @@ const agentLinks = [
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState(() => {
+    return document.cookie.includes("googtrans=/en/kn") ? "kn" : "en";
+  });
   const location = useLocation();
   const navigate = useNavigate();
+
+  const toggleLanguage = () => {
+    const newLang = language === "en" ? "kn" : "en";
+    setLanguage(newLang);
+    
+    if (newLang === "kn") {
+      document.cookie = "googtrans=/en/kn; path=/";
+    } else {
+      document.cookie = "googtrans=/en/en; path=/";
+      // Clear cookie completely to revert to original
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=${window.location.hostname}; path=/;`;
+    }
+    window.location.reload();
+  };
 
   const currentPath = location.pathname;
   let sidebarLinks = shopLinks;
@@ -160,7 +177,7 @@ export default function DashboardLayout() {
               variant="outline" 
               size="sm" 
               className="text-muted-foreground font-semibold px-2 border-primary/20 hover:bg-primary/5"
-              onClick={() => setLanguage(language === "en" ? "kn" : "en")}
+              onClick={toggleLanguage}
             >
               {language === "en" ? "EN/ಕನ್ನಡ" : "ಕನ್ನಡ/EN"}
             </Button>
