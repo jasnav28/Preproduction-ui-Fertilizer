@@ -16,7 +16,8 @@ import {
   UserSquare2,
   FileText,
   Sun,
-  Moon
+  Moon,
+  CreditCard
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,6 +39,7 @@ const shopLinks = [
   { name: "Sales", href: "/shop/sales", icon: ShoppingCart },
   { name: "Credit Ledger", href: "/shop/credit", icon: BookOpen },
   { name: "Reports", href: "/shop/reports", icon: BarChart3 },
+  { name: "Software Billing", href: "/shop/billing", icon: CreditCard },
 ];
 
 const adminLinks = [

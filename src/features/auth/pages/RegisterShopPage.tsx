@@ -82,18 +82,24 @@ export default function RegisterShopPage() {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label>Subscription Plan</Label>
-            <Select defaultValue="basic">
-              <SelectTrigger>
-                <SelectValue placeholder="Select a plan" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="basic">Basic (Free)</SelectItem>
-                <SelectItem value="pro">Pro (₹999/mo)</SelectItem>
-                <SelectItem value="enterprise">Enterprise (Custom)</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Subscription Plan</Label>
+              <Select defaultValue="basic">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a plan" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="basic">Basic</SelectItem>
+                  <SelectItem value="pro">Pro</SelectItem>
+                  <SelectItem value="enterprise">Enterprise</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="subAmount">Subscription Amount (₹)</Label>
+              <Input id="subAmount" type="number" required placeholder="e.g. 1500" />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-6">
