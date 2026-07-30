@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell } from "recharts";
+import jsPDF from "jspdf";
 
 const monthlyData = [
   { name: "Jan", sales: 4000, credit: 2400 },
@@ -22,6 +23,18 @@ const categoryData = [
 const COLORS = ["hsl(199 89% 48%)", "hsl(142 72% 29%)", "hsl(38 92% 50%)", "hsl(0 84.2% 60.2%)"];
 
 export default function ReportsPage() {
+  const handleGenerateReport = (reportName: string = "General Report") => {
+    const doc = new jsPDF();
+    doc.setFontSize(20);
+    doc.text(`${reportName} - Sri Ram Fertilizers`, 14, 22);
+    
+    doc.setFontSize(11);
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 32);
+    doc.text("This is a system generated report.", 14, 42);
+    
+    doc.save(`${reportName.toLowerCase().replace(/ /g, '_')}.pdf`);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -32,7 +45,7 @@ export default function ReportsPage() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => handleGenerateReport()}>
             <Download className="mr-2 h-4 w-4" /> PDF Report
           </Button>
           <Button className="gradient-btn shadow-md text-white size-sm">
@@ -104,7 +117,7 @@ export default function ReportsPage() {
                   <h4 className="font-semibold text-lg group-hover:text-primary transition-colors">{report.name}</h4>
                   <p className="text-sm text-muted-foreground">{report.desc}</p>
                 </div>
-                <Button variant="outline" className="w-full mt-auto">Generate</Button>
+                <Button variant="outline" className="w-full mt-auto" onClick={() => handleGenerateReport(report.name)}>Generate</Button>
               </div>
             ))}
           </div>

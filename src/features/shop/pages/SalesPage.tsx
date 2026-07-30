@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, Plus, Trash2, ReceiptText } from "lucide-react";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export default function SalesPage() {
   const [cart] = useState([
@@ -21,6 +23,29 @@ export default function SalesPage() {
   ]);
 
   const grandTotal = cart.reduce((acc, item) => acc + item.total, 0);
+
+  const handleGenerateInvoice = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(20);
+    doc.text("Invoice - Sri Ram Fertilizers", 14, 22);
+    
+    doc.setFontSize(11);
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 32);
+    
+    autoTable(doc, {
+      startY: 40,
+      head: [["Item", "Quantity", "Price", "Total"]],
+      body: cart.map(item => [
+        item.name,
+        item.qty.toString(),
+        `Rs ${item.price}`,
+        `Rs ${item.total}`
+      ]),
+      foot: [["", "", "Grand Total", `Rs ${grandTotal}`]]
+    });
+    
+    doc.save("invoice.pdf");
+  };
 
   return (
     <div className="space-y-6 h-full flex flex-col">
@@ -153,7 +178,7 @@ export default function SalesPage() {
                 </div>
               </div>
               
-              <Button className="w-full gradient-btn shadow-md py-6 text-lg mt-2">
+              <Button className="w-full gradient-btn shadow-md py-6 text-lg mt-2" onClick={handleGenerateInvoice}>
                 <ReceiptText className="mr-2 h-5 w-5" /> Generate Invoice
               </Button>
             </CardFooter>

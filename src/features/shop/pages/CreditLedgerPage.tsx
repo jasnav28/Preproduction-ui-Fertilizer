@@ -101,7 +101,6 @@ export default function CreditLedgerPage() {
                 <TableHead>Reference</TableHead>
                 <TableHead className="text-right">Amount</TableHead>
                 <TableHead className="text-right">Balance</TableHead>
-                <TableHead className="text-center">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -122,11 +121,6 @@ export default function CreditLedgerPage() {
                     {tx.type === "Credit" ? "+" : "-"}₹{tx.amount.toLocaleString()}
                   </TableCell>
                   <TableCell className="text-right font-medium">₹{tx.balance.toLocaleString()}</TableCell>
-                  <TableCell className="text-center">
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <FileText className="h-4 w-4 text-primary" />
-                    </Button>
-                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

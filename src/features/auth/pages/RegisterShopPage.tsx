@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
 
 export default function RegisterShopPage() {
@@ -16,7 +15,7 @@ export default function RegisterShopPage() {
   };
 
   return (
-    <div className="flex flex-col space-y-6 h-full max-h-[85vh]">
+    <div className="flex flex-col space-y-6">
       <div>
         <h2 className="text-3xl font-bold tracking-tight text-foreground">Register Shop</h2>
         <p className="text-sm text-muted-foreground mt-2">
@@ -24,7 +23,7 @@ export default function RegisterShopPage() {
         </p>
       </div>
 
-      <ScrollArea className="flex-1 pr-4">
+      <div className="flex-1">
         <form className="space-y-6 pb-6" onSubmit={handleRegister}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -112,7 +111,7 @@ export default function RegisterShopPage() {
             Complete Registration
           </Button>
         </form>
-      </ScrollArea>
+      </div>
 
       <p className="text-center text-sm text-muted-foreground pt-4 border-t">
         Already have an account?{" "}

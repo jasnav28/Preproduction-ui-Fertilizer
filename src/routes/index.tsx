@@ -11,6 +11,7 @@ import SalesPage from "@/features/shop/pages/SalesPage";
 import CreditLedgerPage from "@/features/shop/pages/CreditLedgerPage";
 import ReportsPage from "@/features/shop/pages/ReportsPage";
 import AdminDashboardPage from "@/features/admin/pages/AdminDashboardPage";
+import SettingsPage from "@/features/shop/pages/SettingsPage";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +73,16 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <AdminDashboardPage />,
+      },
+    ],
+  },
+  {
+    path: "/settings",
+    element: <DashboardLayout />,
+    children: [
+      {
+        index: true,
+        element: <SettingsPage />,
       },
     ],
   },
