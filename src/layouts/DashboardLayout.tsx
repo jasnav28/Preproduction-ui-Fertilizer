@@ -14,7 +14,9 @@ import {
   Search,
   Store,
   UserSquare2,
-  FileText
+  FileText,
+  Sun,
+  Moon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,12 +59,28 @@ export default function DashboardLayout() {
   const [language, setLanguage] = useState(() => {
     return document.cookie.includes("googtrans=/en/kn") ? "kn" : "en";
   });
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return document.documentElement.classList.contains("dark") ? "dark" : "light";
+    }
+    return "light";
+  });
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
 
   const toggleLanguage = () => {
     const newLang = language === "en" ? "kn" : "en";
@@ -181,7 +199,7 @@ export default function DashboardLayout() {
             </div>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Button 
               variant="outline" 
               size="sm" 
@@ -189,6 +207,15 @@ export default function DashboardLayout() {
               onClick={toggleLanguage}
             >
               {language === "en" ? "EN/ಕನ್ನಡ" : "ಕನ್ನಡ/EN"}
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="text-muted-foreground hover:bg-primary/5 hidden sm:flex"
+              onClick={toggleTheme}
+            >
+              {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
             </Button>
 
             <Button variant="ghost" size="icon" className="relative">
