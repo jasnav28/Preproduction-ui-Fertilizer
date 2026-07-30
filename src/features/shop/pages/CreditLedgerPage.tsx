@@ -11,7 +11,7 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Search, IndianRupee, ArrowDownRight, ArrowUpRight, FileText } from "lucide-react";
+import { Search, IndianRupee, ArrowDownRight, ArrowUpRight } from "lucide-react";
 
 const ledgerData = [
   { id: "TX001", date: "2023-10-25", farmer: "Dilip Desai", type: "Credit", amount: 15000, balance: 28000, ref: "INV-2023-1045" },
