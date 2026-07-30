@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { 
   LayoutDashboard, 
@@ -58,6 +58,10 @@ export default function DashboardLayout() {
   });
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const toggleLanguage = () => {
     const newLang = language === "en" ? "kn" : "en";
@@ -136,12 +140,16 @@ export default function DashboardLayout() {
           <Link
             to="/settings"
             className="flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
           >
             <Settings className={`flex-shrink-0 ${sidebarOpen ? "mr-3" : "mx-auto"} h-5 w-5`} />
             {sidebarOpen && <span>Settings</span>}
           </Link>
           <button
-            onClick={() => navigate("/auth/login")}
+            onClick={() => {
+              navigate("/auth/login");
+              setMobileMenuOpen(false);
+            }}
             className="flex w-full items-center px-3 py-2.5 text-sm font-medium rounded-md text-destructive hover:bg-destructive/10 transition-colors"
           >
             <LogOut className={`flex-shrink-0 ${sidebarOpen ? "mr-3" : "mx-auto"} h-5 w-5`} />
